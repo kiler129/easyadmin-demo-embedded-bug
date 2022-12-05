@@ -39,6 +39,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Person", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\Valid()
+     */
+    public Person $person;
+
+    /**
      * @ORM\Column(type="string")
      */
     #[Assert\NotBlank]
@@ -51,7 +58,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         Assert\NotBlank,
         Assert\Length(min: 2, max: 50)
     ]
-    private ?string $username = null;
+    private ?string $username = '';
 
     /**
      * @ORM\Column(type="string", unique=true)

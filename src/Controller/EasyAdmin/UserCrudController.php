@@ -4,6 +4,7 @@ namespace App\Controller\EasyAdmin;
 
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AvatarField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -23,5 +24,10 @@ class UserCrudController extends AbstractCrudController
         yield TextField::new('fullName');
         yield TextField::new('username');
         yield EmailField::new('email');
+
+        yield AssociationField::new('person')
+                              ->onlyOnForms()
+                              ->renderAsEmbeddedForm()
+        ;
     }
 }
